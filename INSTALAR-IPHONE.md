@@ -1,13 +1,13 @@
 # Instalar o Open Finance no iPhone pelo Windows
 
-O aplicativo foi compilado pelo Xcode no GitHub em 07/10/2026. O notebook reconheceu o iPhone com iOS 27.0 pelo Sideloadly. A instalação ainda precisa terminar e a abertura no aparelho precisa ser confirmada.
+O aplicativo foi compilado pelo Xcode no GitHub em 07/10/2026. O notebook reconheceu o iPhone com iOS 27.0 pelo Sideloadly. A instalação terminou com **Done, 100%** no Sideloadly. O usuário confirmou a abertura e a preservação dos dados no iPhone. A atualização para impedir o zoom automático foi instalada com Done, 100%, e o comportamento ao digitar foi confirmado pelo usuário no iPhone.
 
 ## Arquivos
 
-- Aplicativo: `D:\APP\Open Finance\iphone\Open-Finance-sem-assinatura.ipa`
+- Aplicativo: `D:\APP\Open Finance\iphone\Open-Finance-sem-zoom.ipa`
 - Sideloadly: `D:\APP\Open Finance\ferramentas\Sideloadly\sideloadly.exe`
 - Código: https://github.com/Shazam006/Open-Finance
-- Compilação: https://github.com/Shazam006/Open-Finance/actions/runs/37635627288
+- Compilação: https://github.com/Shazam006/Open-Finance/actions/runs/37640470168
 
 ## Instalar
 
@@ -27,3 +27,14 @@ A conta gratuita exige renovar a assinatura a cada sete dias. Antes de vencer, c
 O Sideloadly também oferece renovação automática pelo daemon quando o notebook está ligado e consegue acessar o iPhone por USB ou Wi-Fi. A renovação por Wi-Fi exige configuração prévia. A versão atual não sincroniza seus lançamentos automaticamente entre notebook e celular.
 
 Fonte: [FAQ oficial do Sideloadly](https://sideloadly.io/faq).
+
+## Atualização de 07/10/2026: campos no iPhone
+
+A atualização para impedir o zoom automático foi instalada com Done, 100%, e o comportamento ao digitar foi confirmado pelo usuário no iPhone.
+
+Os campos `input`, `select` e `textarea` usam fonte de 16 px em `app/globals.css`, impedindo que o tamanho pequeno do texto acione o zoom automático ao receber foco. O zoom manual permanece disponível. A alteração foi incluída na versão do notebook, no pacote web para celular e nos projetos nativos iOS e Android.
+
+O teste local confirmou 16 px nos campos de Saldos e Ajustes. O IPA entregue foi verificado e contém a mesma regra. A correção anterior da tela branca permanece em `native-app/scripts/build.mjs`; a abertura e o salvamento dessa versão foram confirmados por você no aparelho.
+
+Arquivo atual: `D:\APP\Open Finance\iphone\Open-Finance-sem-zoom.ipa`. Para atualizar e renovar, use a mesma conta Apple e mantenha o aplicativo instalado. Compilação: https://github.com/Shazam006/Open-Finance/actions/runs/37640470168.
+
