@@ -1,0 +1,12 @@
+node_modules/
+www/
+build/
+.gradle/
+Pods/
+xcuserdata/
+.env*
+local.properties
+*.ipa
+*.apk
+*.aab
+.DS_Store

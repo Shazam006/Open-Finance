@@ -1,0 +1,12 @@
+import {build} from "esbuild";
+import {readFileSync,writeFileSync,mkdirSync} from "node:fs";
+import {fileURLToPath} from "node:url";
+const root=fileURLToPath(new URL("../../",import.meta.url));
+const app=fileURLToPath(new URL("../",import.meta.url));
+mkdirSync(app+"www",{recursive:true});
+const result=await build({entryPoints:[app+"src/main.ts"],bundle:true,format:"iife",platform:"browser",minify:true,write:false,nodePaths:[app+"node_modules"],define:{"process.env.NODE_ENV":'"production"'}});
+const css=readFileSync(root+"app/globals.css","utf8").replace('@import "tailwindcss";',"");
+const assets=Object.fromEntries(["/favicon.svg","/icons/icon-192.png","/icons/icon-512.png"].map(name=>[name,`data:${name.endsWith("svg")?"image/svg+xml":"image/png"};base64,${readFileSync(root+"public"+name).toString("base64")}`]));
+const script=result.outputFiles[0].text.replaceAll("</script","<\\/script");
+writeFileSync(app+"www/index.html",`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#12213b"><title>Open Finance</title><style>${css}</style></head><body><div id="root"></div><script>window.openFinanceAssets=${JSON.stringify(assets)};${script}</script></body></html>`);
+console.log("Interface do aplicativo nativo gerada em native-app/www. Ainda precisa de compilação e assinatura.");

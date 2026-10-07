@@ -1,0 +1,36 @@
+name: Gerar Open Finance para iPhone
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-ios:
+    runs-on: macos-26
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: native-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: native-app/package-lock.json
+      - name: Instalar dependências
+        run: npm ci
+      - name: Verificar dados e gerar interface
+        run: |
+          npm run verify
+          npm run build
+          npx cap sync ios
+      - name: Compilar sem assinatura Apple
+        run: node scripts/build-ios-unsigned.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Open-Finance-iPhone-sem-assinatura
+          path: native-app/build/Open-Finance-sem-assinatura.ipa
+          if-no-files-found: error
+          retention-days: 7

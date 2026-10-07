@@ -1,0 +1,19 @@
+{
+	"appId": "br.com.pedro.openfinance",
+	"appName": "Open Finance",
+	"webDir": "www",
+	"server": {
+		"androidScheme": "https"
+	},
+	"ios": {
+		"contentInset": "never",
+		"backgroundColor": "#f3f6fb"
+	},
+	"android": {
+		"backgroundColor": "#f3f6fb"
+	},
+	"packageClassList": [
+		"FilesystemPlugin",
+		"SharePlugin"
+	]
+}
