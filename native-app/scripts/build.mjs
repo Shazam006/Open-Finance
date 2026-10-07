@@ -4,7 +4,7 @@ import {fileURLToPath} from "node:url";
 const root=fileURLToPath(new URL("../../",import.meta.url));
 const app=fileURLToPath(new URL("../",import.meta.url));
 mkdirSync(app+"www",{recursive:true});
-const result=await build({entryPoints:[app+"src/main.ts"],bundle:true,format:"iife",platform:"browser",minify:true,write:false,nodePaths:[app+"node_modules"],define:{"process.env.NODE_ENV":'"production"'}});
+const result=await build({entryPoints:[app+"src/main.ts"],bundle:true,format:"iife",platform:"browser",jsx:"automatic",target:"es2020",minify:true,write:false,nodePaths:[app+"node_modules"],define:{"process.env.NODE_ENV":'"production"'}});
 const css=readFileSync(root+"app/globals.css","utf8").replace('@import "tailwindcss";',"");
 const assets=Object.fromEntries(["/favicon.svg","/icons/icon-192.png","/icons/icon-512.png"].map(name=>[name,`data:${name.endsWith("svg")?"image/svg+xml":"image/png"};base64,${readFileSync(root+"public"+name).toString("base64")}`]));
 const script=result.outputFiles[0].text.replaceAll("</script","<\\/script");
